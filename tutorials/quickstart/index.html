@@ -114,18 +114,40 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">使用说明</a>
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">📜引擎使用说明</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#_12" class="nav-link">测试方式</a>
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">引擎启动</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#_14" class="nav-link">版本发布</a>
+            <li class="nav-item" data-level="2"><a href="#_5" class="nav-link">引擎交互</a>
               <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_6" class="nav-link">引擎关闭</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_7" class="nav-link">配置文档</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_8" class="nav-link">配置文件结构</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_9" class="nav-link">配置示例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#udp" class="nav-link">UDP数据包</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -133,17 +155,37 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="_1">使用说明</h2>
-<h3 id="_2">引擎的启动、交互、关闭</h3>
-<h4 id="_3">引擎启动</h4>
+<h2 id="_1">📜引擎使用说明</h2>
+<h3 id="npc_engine">npc_engine的开发流程</h3>
+<ul>
+<li>撰写配置文件(NPC, Action, Scenario)</li>
+<li>启动引擎</li>
+<li>游戏端发送UDP请求包并处理返回结果</li>
+<li>关闭引擎</li>
+</ul>
+<h3 id="_2">引擎的配置、启动、交互、关闭</h3>
+<h4 id="_3">引擎配置</h4>
+<p>在使用之前，开发者需要更新维护引擎的配置文件，配置文件位于<strong>npc_engine/Config</strong>文件夹中，包括：</p>
+<ul>
+<li>OpenAI API的配置文件: src/config/openai_config.json </li>
+<li>动作配置文件: src/config/action/your_action_XXX.json</li>
+<li>NPC配置文件: src/config/npc/your_npc_nameXXX.json</li>
+<li>场景配置文件: src/config/knowledge/scenes/your_scenario_nameXXX.json</li>
+</ul>
+<h2 id="_4">引擎启动</h2>
 <p>引擎可以使用对应平台的<strong>运行脚本</strong>(windows下是.bat)或者手动使用<strong>python src/engine.py</strong>运行。</p>
-<h4 id="_4">引擎交互</h4>
-<p>-在引擎端运行前，游戏端可以在默认文件夹中撰写有关“动作”、“角色”以及“场景”的配置文件来为引擎端提供初始化数据（详情请见《配置文档》），配置文件会在引擎端运行期间自主更新。
--在引擎端运行期间，游戏端可以通过UDP数据包传送和接收的方式进行信息交互（）：
- - 引擎端默认在8199端口监听游戏端并发送数据包；游戏端默认在8084端口监听引擎端并发送数据包
- - 引擎启动后，游戏端按照相应功能的数据包格式组织数据并从8084端口发送“请求包”到8199端口（详情请见《UDP数据包》）。
- - 引擎端在接收游戏端的功能请求后，会进行相应信息处理与打包，并从8199端口发送“回复包”到8084端口。
- - 游戏端发送包代码示例（以Unity为例）：</p>
+<h2 id="_5">引擎交互</h2>
+<p>引擎端和游戏端通过UDP数据包按照<a href="#配置示例">UDP数据包格式</a>进行交互，引擎端默认在8199端口监听游戏端数据包，游戏端默认在8084端口监听引擎端数据包。</p>
+<ul>
+<li>在引擎端运行前，开发者可以在配置文件夹(Config)中撰写有关“动作(Action)”、“角色(NPC)”以及“场景(Scenario)”的配置文件来为引擎端提供初始化数据（详情请见<a href="#配置文档">《配置文档》</a>），配置文件会在引擎端收到关闭指令后自主更新。</li>
+<li>在引擎端运行期间，游戏端可以通过UDP数据包传送和接收的方式进行信息交互：<ul>
+<li><strong>引擎端默认在8199端口</strong>监听游戏端数据包，并默认<strong>游戏端在8084端口</strong>监听引擎端数据包</li>
+<li>引擎启动后，游戏端按照<strong>特定数据包格式</strong>发送“请求包”到引擎端(8199端口)（详情请见《UDP数据包》）。</li>
+<li>引擎端在接到UDP请求后，会根据NPC状态返回“回复包”到游戏端(8084端口)。</li>
+<li>游戏端发送包代码示例（以Unity为例）：</li>
+</ul>
+</li>
+</ul>
 <pre><code class="language-C#">private void SendData(object data)
 {
     string json = JsonUtility.ToJson(data);  // 提取数据data中的字符串信息
@@ -198,10 +240,10 @@ public void Listen()
     }
 }
 </code></pre>
-<h4 id="_5">引擎关闭</h4>
+<h2 id="_6">引擎关闭</h2>
 <p>游戏端通过发送“close”功能数据包给引擎端来请求关闭引擎（详见下文）。</p>
-<h3 id="_6">配置文档</h3>
-<h4 id="_7">配置文件结构</h4>
+<h1 id="_7">配置文档</h1>
+<h2 id="_8">配置文件结构</h2>
 <ul>
 <li>python_lib(依赖库)</li>
 <li>code(项目代码)</li>
@@ -226,7 +268,7 @@ public void Listen()
 </ul>
 </li>
 </ul>
-<h4 id="python">配置示例（python）</h4>
+<h2 id="_9">配置示例</h2>
 <p>-\action\chat.json</p>
 <pre><code class="language-python">{
   &quot;name&quot;: &quot;chat&quot;,   # 动作名称
@@ -294,12 +336,10 @@ public void Listen()
  }
 
 </code></pre>
-<h3 id="udp">UDP数据包</h3>
-<h4 id="_8">数据包格式记录</h4>
-<p>https://aimakers.atlassian.net/wiki/spaces/npcengine/pages/3735735/NPC</p>
-<h4 id="_9">引擎初始化和关闭：</h4>
-<p>在引擎初始化或者加载一个新场景的时候发送init数据包给引擎端，需要指定加载的场景json</p>
-<pre><code class="language-python"># 引擎初始化的包
+<h2 id="udp">UDP数据包</h2>
+<h4 id="_10">场景初始化数据包：</h4>
+<p>在引擎初始化或者加载一个新场景的时候，游戏端需要先发送init数据包给引擎端。引擎端才会加载指定场景的NPC。</p>
+<pre><code class="language-python"># 场景初始化的包
 {
     &quot;func&quot;:&quot;init&quot;,   # 表示该传送的数据包是用于加载场景
     # 必填字段
@@ -338,15 +378,18 @@ public void Listen()
         &quot;memory&quot;:[ ]
         }], # 可以留空，默认按照gscene.json初始化场景NPC。非空则在之前基础上添加。
 }
-# 引擎关闭的包
+</code></pre>
+<h4 id="_11">引擎关闭数据包</h4>
+<p>在游戏结束的时候，engine需要一个close数据包，用于更新所有NPC的状态到json文件中。</p>
+<pre><code class="language-python"># 引擎关闭的包
 {
     &quot;func&quot;:&quot;close&quot; # 关闭引擎,并保存所有NPC到json
 }
 </code></pre>
-<h4 id="npc">NPC自主行为:</h4>
+<h4 id="npc">NPC的动作数据包:</h4>
 <p>NPC不会开始自主行动，除非你发送了wakeup包给它。
-npc-engine接到wakeup包之后，会返回action行为。
-游戏这边需要执行对应action，执行最终状态以action_done的形式返回给npc-engine
+npc-engine接到wakeup包之后，会返回action行为数据包。
+游戏端需要执行对应action，执行最终状态以action_done的形式返回给npc-engine
 engine接收到action_done包之后会继续返回action行为包。</p>
 <pre><code class="language-python"># wakeup包例：
 {
@@ -400,7 +443,7 @@ engine接收到action_done包之后会继续返回action行为包。</p>
     &quot;parameters&quot;:[],
 }
 </code></pre>
-<h4 id="_10">对话相关行为：</h4>
+<h4 id="_12">对话相关行为：</h4>
 <p>游戏需要自己确认npc的群体对话触发机制，通常是一个包含固定半径的对话房间。
 发送create_conversation给engine后，engine会根据提供的参数返回一个长剧本包，游戏需要自己实现剧本演出。
 每一行剧本演出完成后，需要发送确认包给engine否则不会有记忆。</p>
@@ -478,7 +521,7 @@ engine接收到action_done包之后会继续返回action行为包。</p>
 }
 
 </code></pre>
-<h3 id="_11">引擎交互注意事项</h3>
+<h3 id="_13">引擎交互注意事项</h3>
 <ul>
 <li>游戏端发送init包后，引擎端会读取数据包中场景名称所对应的配置文件scene_name.json，然后初始化场景。</li>
 <li>如果init数据包中包含npc信息，那么引擎端会默认从该数据包中读入角色信息；如果不包含，则引擎端会从scene_name.json配置文件中读入角色信息。</li>
@@ -487,22 +530,7 @@ engine接收到action_done包之后会继续返回action行为包。</p>
 <li>长时间没有自主行为的npc需要游戏端自行检测，发送wakeup包到引擎进行再次唤醒</li>
 <li>引擎端接收wakeup包后会生成npc的动作并返回action包给游戏端</li>
 <li>游戏端执行对应的action包之后，需要发送action_done包到引擎，这样引擎才会继续生成npc下一步行为。</li>
-</ul>
-<h2 id="_12">测试方式</h2>
-<h3 id="_13">测试数据</h3>
-<p>测试数据统一放在test/test_packets.py中，可以自己添加测试数据。</p>
-<h3 id="npc_action">NPC_ACTION测试参考代码:</h3>
-<p>1.test_npc_action.py
-运行这个脚本然后查看logs/下的日志
-2.test_npc_action.ipynb
-运行CELL然后查看logs/下的日志，可以自定义自己的包。
-上面的代码仅供参考，可以自己写一个脚本来测试。
-在npc_engine父目录中import npc_engine 然后 engine = NPCEngine() 就可以启动。</p>
-<h2 id="_14">版本发布</h2>
-<h3 id="_15">打包方式</h3>
-<p>项目使用pyarmor加密，然后在windows中使用嵌入式的python执行engine.py。</p>
-<p>打包脚本为npc_engine/dist/release_windows.sh</p>
-<p>打包后可运行的windows项目在npc_engine/dist/release/windows_ver，其中脚本start_engine.bat用来启动engine</p></div>
+</ul></div>
             </div>
         </div>
 
