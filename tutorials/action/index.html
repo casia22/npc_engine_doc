@@ -42,6 +42,10 @@
 </li>
                                     
 <li>
+    <a href="../engine/" class="dropdown-item">0 - Engine Configuration</a>
+</li>
+                                    
+<li>
     <a href="../npc/" class="dropdown-item">1 - NPC Configuration</a>
 </li>
                                     
@@ -113,12 +117,53 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#action" class="nav-link">Action配置总览</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#action_1" class="nav-link">Action配置例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#action_2" class="nav-link">场景下的多个Action配置</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h2 id="action">Action配置总览</h2>
+<p>Action配置文件在npc_engine/src/config/action/文件夹下，以json格式存储。</p>
+<p>Action模块支持开发者通过<a href="#action配置例">配置文件</a>的方式定义NPC的具体行为。</p>
+<p>Action模块和<a href="../scenario/#Scenario配置方法">Scenario配置文件</a>结合，可以控制NPC在不同场景下的动作空间。</p>
+<h2 id="action_1">Action配置例</h2>
+<p>Action(动作)例子如下:</p>
+<pre><code class="language-python"># npc_engine/src/config/action/get.json
+{
+  # 动作名字。支持自定义，最好具有代表性。
+  &quot;name&quot;: &quot;get&quot;, 
+  # 动作的自然语言约束，用于教LLM调用。需要是&lt;action_name|object|params&gt;这种三元组的形式
+  &quot;definition&quot;: &quot;&lt;get|object1|object2&gt;，从[object2]中获得[object1]，[object2]可以是人物或者存储器皿；你只可以get'看到的/身上的'物品；&quot;, # 
+  # 是否期待多参数，也就是三元组中params是多个参数还是一个参数
+  &quot;multi_param&quot;: True,
+  # 动作调用的自然语言例子，用于教LLM调用。需要是&lt;action_name|object|params&gt;这种三元组的形式
+  &quot;example&quot;: &quot;&lt;get|冰箱|西瓜&gt;或&lt;get|西瓜|冰箱&gt;等&quot;,
+  # 记忆条目的模板，用于生成记忆条目。有三个内置参量，分别是npc_name, object, parameters。分别代表NPC名字，对象，参数。
+  &quot;log_template&quot;:{
+    &quot;success&quot;: &quot;{npc_name}成功地从{object}获得了{parameters}&quot;,
+    &quot;fail&quot;: &quot;{npc_name}试图从{object}里获得{parameters}，但是失败了. 原因是{reason}&quot;
+  }
+}
+</code></pre>
+<p>Action的调用表现取决于配置文件中prompt写的好坏，开发者可以参照例子自行配置。</p>
+<h2 id="action_2">场景下的多个Action配置</h2>
+<p>只有一个Action肯定是难以满足NPC的复杂行为需求的，因此Action模块支持开发者配置多个Action。
+通过配置<a href="../scenario/#Scenario配置方法">scenario配置文件</a>中的all_actions字段，就可以约束NPC在该场景下的动作空间。</p></div>
             </div>
         </div>
 

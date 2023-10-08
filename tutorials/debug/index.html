@@ -42,6 +42,10 @@
 </li>
                                     
 <li>
+    <a href="../engine/" class="dropdown-item">0 - Engine Configuration</a>
+</li>
+                                    
+<li>
     <a href="../npc/" class="dropdown-item">1 - NPC Configuration</a>
 </li>
                                     
@@ -113,12 +117,40 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#debug" class="nav-link">Debug方法</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">日志纠错</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">终端纠错</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">反馈</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h2 id="debug">Debug方法</h2>
+<h2 id="_1">日志纠错</h2>
+<p>目前，NPC_Engine的最主要的纠错方式是通过日志文件。
+日志的位置在npc_engine/logs/目录下，日志文件的命名格式为：<code>engine_YYYY-MM-DD.log</code>。</p>
+<h2 id="_2">终端纠错</h2>
+<p>通过直接运行批处理文件(start_engine.bat)的方式，可以及时看到错误日志的打印。</p>
+<h2 id="_3">反馈</h2>
+<p>如果遇到Bug或者其他改进意见，可以在https://github.com/casia22/npc-engine/issues中提出。</p>
+<p>或者，发送邮件到 partners@cognimatrix.games </p></div>
             </div>
         </div>
 

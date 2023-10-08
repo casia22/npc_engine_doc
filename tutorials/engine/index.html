@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Conversation Module - CogniMatrix NPC Engine</title>
+        <title>0 - Engine Configuration - CogniMatrix NPC Engine</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -33,45 +33,45 @@
                             <li class="navitem">
                                 <a href="../.." class="nav-link">Home</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorial <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../../tutorials/quickstart/" class="dropdown-item">Quickstart</a>
+    <a href="../quickstart/" class="dropdown-item">Quickstart</a>
 </li>
                                     
 <li>
-    <a href="../../tutorials/engine/" class="dropdown-item">0 - Engine Configuration</a>
+    <a href="./" class="dropdown-item active">0 - Engine Configuration</a>
 </li>
                                     
 <li>
-    <a href="../../tutorials/npc/" class="dropdown-item">1 - NPC Configuration</a>
+    <a href="../npc/" class="dropdown-item">1 - NPC Configuration</a>
 </li>
                                     
 <li>
-    <a href="../../tutorials/scenario/" class="dropdown-item">2 - Scenario Configuration</a>
+    <a href="../scenario/" class="dropdown-item">2 - Scenario Configuration</a>
 </li>
                                     
 <li>
-    <a href="../../tutorials/action/" class="dropdown-item">3 - Action Configuration</a>
+    <a href="../action/" class="dropdown-item">3 - Action Configuration</a>
 </li>
                                     
 <li>
-    <a href="../../tutorials/debug/" class="dropdown-item">4 - Debugging</a>
+    <a href="../debug/" class="dropdown-item">4 - Debugging</a>
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown active">
+                            <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Modules <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="./" class="dropdown-item active">Conversation Module</a>
+    <a href="../../modules/conversation/" class="dropdown-item">Conversation Module</a>
 </li>
                                     
 <li>
-    <a href="../action/" class="dropdown-item">Action Module</a>
+    <a href="../../modules/action/" class="dropdown-item">Action Module</a>
 </li>
                                 </ul>
                             </li>
@@ -87,17 +87,17 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../../tutorials/debug/" class="nav-link">
+                                <a rel="prev" href="../quickstart/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../action/" class="nav-link">
+                                <a rel="next" href="../npc/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/modules/conversation.md" class="nav-link">Edit on casia22/npc_engine.github.io
+                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/tutorials/engine.md" class="nav-link">Edit on casia22/npc_engine.github.io
                                     </a>
                             </li>
                     </ul>
@@ -118,12 +118,67 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#conversation" class="nav-link">Conversation模块简述</a>
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">📜引擎使用说明</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#conversationudp" class="nav-link">Conversation模块UDP包</a>
+            <li class="nav-item" data-level="2"><a href="#11" class="nav-link">1.1 引擎配置</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#12" class="nav-link">1.2 引擎启动</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#13" class="nav-link">1.3 引擎交互</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#14" class="nav-link">1.4 引擎关闭</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">✨配置文件结构</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#21" class="nav-link">2.1 项目目录结构</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#udp" class="nav-link">🎒UDP数据包</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#31" class="nav-link">3.1 场景初始化数据包</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#32" class="nav-link">3.2 引擎关闭数据包</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#33-npc" class="nav-link">3.3 NPC的动作数据包</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#34" class="nav-link">3.4 对话相关行为</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">👮‍引擎交互注意事项</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -132,13 +187,169 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="conversation">Conversation模块简述</h2>
-<p><img alt="Conversation" src="../../img/conversation_module.png" /></p>
+<h2 id="_1">📜引擎使用说明</h2>
+<p><img alt="overview" src="../../img/overview.png" /></p>
+<h3 id="npc_engine">npc_engine的开发流程</h3>
+<ul>
+<li><a href="#1.1 引擎配置">引擎配置</a></li>
+<li><a href="#1.2 引擎启动">启动引擎</a></li>
+<li><a href="#udp">UDP请求</a></li>
+<li><a href="#1.4 引擎关闭">关闭引擎</a></li>
+</ul>
+<h2 id="11">1.1 引擎配置</h2>
+<p>在使用之前，开发者需要更新维护引擎的配置文件，配置文件位于<strong>npc_engine/Config</strong>文件夹中，包括：</p>
+<ul>
+<li>OpenAI API的配置文件: src/config/openai_config.json </li>
+<li><a href="../action/#action配置例">动作配置文件</a>: src/config/action/your_action_XXX.json</li>
+<li><a href="../npc/#配置文件初始化">NPC配置文件</a>: src/config/npc/your_npc_nameXXX.json</li>
+<li><a href="../scenario/#scenario配置方法">场景配置文件</a>: src/config/knowledge/scenes/your_scenario_nameXXX.json</li>
+</ul>
+<h2 id="12">1.2 引擎启动</h2>
+<p>引擎可以使用对应平台的<strong>运行脚本</strong>(windows下是.bat)或者手动使用<strong>python src/engine.py</strong>运行。</p>
+<h2 id="13">1.3 引擎交互</h2>
+<p>引擎端和游戏端通过UDP数据包按照<a href="#udp">UDP数据包格式</a>进行交互，引擎端默认在8199端口监听游戏端数据包，游戏端默认在8084端口监听引擎端数据包。</p>
+<h2 id="14">1.4 引擎关闭</h2>
+<p>游戏端通过发送“close”功能数据包给引擎端来请求关闭引擎（详见<a href="#udp">数据包</a>）。</p>
+<h2 id="_2">✨配置文件结构</h2>
+<h2 id="21">2.1 项目目录结构</h2>
+<ul>
+<li>python_lib(依赖库)</li>
+<li>code(项目代码)</li>
+<li>npc-engine\<ul>
+<li>logs(运行日志)</li>
+<li>src(源代码)</li>
+<li>config(配置文件)<ul>
+<li>action(场景中允许的动作配置文件)</li>
+<li>chat.json(自定义第一个动作的配置文件)</li>
+<li>...</li>
+<li>npc(npc描述配置文件)</li>
+<li>村长.json(自定义第一个角色的配置文件)</li>
+<li>...</li>
+<li>knowledge(知识、场景配置文件)</li>
+<li>scenes(子场景配置文件)<ul>
+<li>警察局.json(自定义第一个具体场景的配置文件)</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="udp">🎒UDP数据包</h2>
+<h2 id="31">3.1 场景初始化数据包</h2>
+<p>在引擎初始化或者加载一个新场景的时候，游戏端需要先发送init数据包给引擎端。引擎端才会加载指定场景的NPC。</p>
+<pre><code class="language-python"># 场景初始化的包
+{
+    &quot;func&quot;:&quot;init&quot;,   # 表示该传送的数据包是用于加载场景
+    # 必填字段
+    &quot;scene_name&quot;:&quot;雁栖村&quot;,   # 加载场景的名称，代表在什么场景下初始化
+    &quot;language&quot;:&quot;C&quot;,   # 选择语言版本，“E”表示英文，“C”表示中文。默认且推荐使用中文。
+    # 🉑️选字段
+    &quot;npc&quot;:[
+        {
+            &quot;name&quot;:&quot;李大爷&quot;,
+            &quot;desc&quot;:&quot;是个好人&quot;,
+            &quot;npc_state&quot;: {
+                  &quot;position&quot;: &quot;李大爷家&quot;,
+                  &quot;observation&quot;: {
+                          &quot;people&quot;: [&quot;王大妈&quot;, &quot;村长&quot;, &quot;隐形李飞飞&quot;],
+                          &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
+                          &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
+                                },
+                  &quot;backpack&quot;:[&quot;黄瓜&quot;, &quot;1000元&quot;, &quot;老报纸&quot;]
+                       },
+            &quot;mood&quot;:&quot;正常&quot;,
+            &quot;memory&quot;:[ ]
+        },
+        {
+            &quot;name&quot;:&quot;王大妈&quot;,
+            &quot;desc&quot;:&quot;是个好人&quot;,
+            &quot;npc_state&quot;: {
+                  &quot;position&quot;: &quot;李大爷家&quot;,
+                  &quot;observation&quot;: {
+                          &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;隐形李飞飞&quot;],
+                          &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
+                          &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
+                                },
+                  &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+                       },
+        &quot;mood&quot;:&quot;焦急&quot;,
+        &quot;memory&quot;:[ ]
+        }], # 可以留空，默认按照gscene.json初始化场景NPC。非空则在之前基础上添加。
+}
+</code></pre>
+<h2 id="32">3.2 引擎关闭数据包</h2>
+<p>在游戏结束的时候，engine需要一个close数据包，用于更新所有NPC的状态到json文件中。</p>
+<pre><code class="language-python"># 引擎关闭的包
+{
+    &quot;func&quot;:&quot;close&quot; # 关闭引擎,并保存所有NPC到json
+}
+</code></pre>
+<h2 id="33-npc">3.3 NPC的动作数据包</h2>
+<p>NPC不会开始自主行动，除非你发送了wakeup包给它。
+npc-engine接到wakeup包之后，会返回action行为数据包。
+游戏端需要执行对应action，执行最终状态以action_done的形式返回给npc-engine
+engine接收到action_done包之后会继续返回action行为包。</p>
+<p><img alt="Action" src="../../img/action_module.png" /></p>
+<pre><code class="language-python"># wakeup包例：
+{
+    &quot;func&quot;:&quot;wake_up&quot;,
+    &quot;npc_name&quot;: &quot;王大妈&quot;,
+
+    &quot;scenario_name&quot;: &quot;李大爷家&quot;, 
+    &quot;npc_state&quot;: {
+      &quot;position&quot;: &quot;李大爷家卧室&quot;,
+      &quot;observation&quot;: {
+              &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;李飞飞&quot;],
+              &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
+              &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
+                    },
+      &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+    },
+
+    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳 
+}
+
+# action_done包例
+{
+    &quot;func&quot;:&quot;action_done&quot;,
+    &quot;npc_name&quot;:&quot;王大妈&quot;,
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳
+
+    &quot;scenario_name&quot;: &quot;李大爷家&quot;, 
+    &quot;npc_state&quot;: {
+      &quot;position&quot;: &quot;李大爷家卧室&quot;,
+      &quot;observation&quot;: {
+              &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;李飞飞&quot;],
+              &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
+              &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
+                    },
+      &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+    },
+
+    &quot;action&quot;:&quot;mov&quot;,
+    &quot;object&quot;:&quot;李大爷家&quot;,  # 之前传过来的动作对象
+    &quot;parameters&quot;:[], # 之前传过来的参数
+    &quot;reason&quot;: &quot;&quot;, # &quot;王大妈在去往‘警察局’的路上被李大爷打断&quot;
+}
+
+# action_done、wakeup发给游戏包后返回的ACTION包
+{
+    &quot;name&quot;:&quot;action&quot;,
+    &quot;npc_name&quot;:&quot;李大妈&quot;,
+    &quot;action&quot;:&quot;mov&quot;,
+    &quot;object&quot;:&quot;李大爷家&quot;,
+    &quot;parameters&quot;:[],
+}
+</code></pre>
+<h2 id="34">3.4 对话相关行为</h2>
 <p>游戏需要自己确认npc的群体对话触发机制，通常是一个包含固定半径的对话房间。
 发送create_conversation给engine后，engine会根据提供的参数返回一个长剧本包，游戏需要自己实现剧本演出。
 每一行剧本演出完成后，需要发送确认包给engine否则不会有记忆。</p>
 <p>剧本有插入功能，比如玩家要插入对话或者一个新的npc进入了对话，这时候发送re_create_conversation包(带着之前的对话ID)便可，会重新生成一个考虑到插入npc的接续剧本。</p>
-<h2 id="conversationudp">Conversation模块UDP包</h2>
+<p><img alt="Conversation" src="../../img/conversation_module.png" /></p>
 <pre><code class="language-python"># create_conversation游戏端发给引擎的包
 {
     &quot;func&quot;: &quot;create_conversation&quot;,
@@ -210,7 +421,18 @@
     &quot;player_desc&quot;: &quot;玩家是一个疯狂的冒险者，喜欢吃圆圆的东西&quot;,  # 玩家的描述，可选留空
     &quot;length&quot;: &quot;M&quot;  # 可以选择的剧本长度，S M L X 可选。 
 }
-</code></pre></div>
+
+</code></pre>
+<h2 id="_3">👮‍引擎交互注意事项</h2>
+<ul>
+<li>游戏端发送init包后，引擎端会读取数据包中场景名称所对应的配置文件scene_name.json，然后初始化场景。</li>
+<li>如果init数据包中包含npc信息，那么引擎端会默认从该数据包中读入角色信息；如果不包含，则引擎端会从scene_name.json配置文件中读入角色信息。</li>
+<li>每个场景配置文件scene_name.json中的可支持动作和存在的角色名称都需要在\action和\npc中进行定义，如果未定义则会报错。</li>
+<li>每个npc在游戏中的自主行动需要游戏端对针对该角色向引擎端发送wakeup包来实现的。</li>
+<li>长时间没有自主行为的npc<strong>需要游戏端自行检测</strong>，发送wakeup包到引擎进行再次唤醒</li>
+<li>引擎端接收wakeup包后会生成npc的动作并返回action包给游戏端</li>
+<li>游戏端执行对应的action包之后，需要发送action_done包到引擎，这样引擎才会继续生成npc下一步行为。</li>
+</ul></div>
             </div>
         </div>
 

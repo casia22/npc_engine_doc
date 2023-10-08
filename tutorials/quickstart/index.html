@@ -42,6 +42,10 @@
 </li>
                                     
 <li>
+    <a href="../engine/" class="dropdown-item">0 - Engine Configuration</a>
+</li>
+                                    
+<li>
     <a href="../npc/" class="dropdown-item">1 - NPC Configuration</a>
 </li>
                                     
@@ -88,7 +92,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../npc/" class="nav-link">
+                                <a rel="next" href="../engine/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -114,40 +118,38 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">📜引擎使用说明</a>
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">📜 快速开始</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">引擎启动</a>
+            <li class="nav-item" data-level="2"><a href="#11" class="nav-link">1.1 下载引擎</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#_5" class="nav-link">引擎交互</a>
+            <li class="nav-item" data-level="2"><a href="#12" class="nav-link">1.2 启动引擎</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#_6" class="nav-link">引擎关闭</a>
+            <li class="nav-item" data-level="2"><a href="#13-python" class="nav-link">1.3 脚本交互(python)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#_7" class="nav-link">配置文档</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#_8" class="nav-link">配置文件结构</a>
+            <li class="nav-item" data-level="2"><a href="#udp" class="nav-link">📜 UDP数据包收发</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#_9" class="nav-link">配置示例</a>
+            
+            <li class="nav-item" data-level="2"><a href="#21-python" class="nav-link">2.1 收发包(python)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#udp" class="nav-link">UDP数据包</a>
+            
+            <li class="nav-item" data-level="2"><a href="#22-c" class="nav-link">2.2 收发包(C#)</a>
               <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -155,53 +157,176 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="_1">📜引擎使用说明</h2>
-<h3 id="npc_engine">npc_engine的开发流程</h3>
-<ul>
-<li>撰写配置文件(NPC, Action, Scenario)</li>
-<li>启动引擎</li>
-<li>游戏端发送UDP请求包并处理返回结果</li>
-<li>关闭引擎</li>
-</ul>
-<h3 id="_2">引擎的配置、启动、交互、关闭</h3>
-<h4 id="_3">引擎配置</h4>
-<p>在使用之前，开发者需要更新维护引擎的配置文件，配置文件位于<strong>npc_engine/Config</strong>文件夹中，包括：</p>
-<ul>
-<li>OpenAI API的配置文件: src/config/openai_config.json </li>
-<li>动作配置文件: src/config/action/your_action_XXX.json</li>
-<li>NPC配置文件: src/config/npc/your_npc_nameXXX.json</li>
-<li>场景配置文件: src/config/knowledge/scenes/your_scenario_nameXXX.json</li>
-</ul>
-<h2 id="_4">引擎启动</h2>
-<p>引擎可以使用对应平台的<strong>运行脚本</strong>(windows下是.bat)或者手动使用<strong>python src/engine.py</strong>运行。</p>
-<h2 id="_5">引擎交互</h2>
-<p>引擎端和游戏端通过UDP数据包按照<a href="#配置示例">UDP数据包格式</a>进行交互，引擎端默认在8199端口监听游戏端数据包，游戏端默认在8084端口监听引擎端数据包。</p>
-<ul>
-<li>在引擎端运行前，开发者可以在配置文件夹(Config)中撰写有关“动作(Action)”、“角色(NPC)”以及“场景(Scenario)”的配置文件来为引擎端提供初始化数据（详情请见<a href="#配置文档">《配置文档》</a>），配置文件会在引擎端收到关闭指令后自主更新。</li>
-<li>在引擎端运行期间，游戏端可以通过UDP数据包传送和接收的方式进行信息交互：<ul>
-<li><strong>引擎端默认在8199端口</strong>监听游戏端数据包，并默认<strong>游戏端在8084端口</strong>监听引擎端数据包</li>
-<li>引擎启动后，游戏端按照<strong>特定数据包格式</strong>发送“请求包”到引擎端(8199端口)（详情请见《UDP数据包》）。</li>
-<li>引擎端在接到UDP请求后，会根据NPC状态返回“回复包”到游戏端(8084端口)。</li>
-<li>游戏端发送包代码示例（以Unity为例）：</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-C#">private void SendData(object data)
+<h2 id="_1">📜 快速开始</h2>
+<p>你可点击发行版本中的.bat文件来快速启动引擎，相关响应会在控制台中显示。</p>
+<h2 id="11">1.1 下载引擎</h2>
+<p>访问我们的<a href="https://github.com/casia22/npc-engine">github仓库</a>下载最新的引擎代码，或者直接点击<a href="https://github.com/casia22/npc-engine/releases">这里</a>.</p>
+<h2 id="12">1.2 启动引擎</h2>
+<p>每个发行版本中都会有对应平台的快速调试脚本(start_engine.bat), 双击即可启动引擎。执行过程的日志和收发包都会记录在logs文件夹下。</p>
+<h2 id="13-python">1.3 脚本交互(python)</h2>
+<p>引擎监听8084端口，游戏端监听8199端口，引擎端和游戏端通过UDP数据包进行交互。</p>
+<p>可以参照下面的python脚本👇来快速测试引擎的功能。</p>
+<p>(由于UDP的包机制，我们通过一些trick来实现了大数据包的传输，具体的实现细节可以参考<a href="#udp数据包">这里</a>)</p>
+<pre><code class="language-python">import socket
+import json
+import uuid
+import time
+import threading
+
+&quot;&quot;&quot;
+    该脚本用于测试引擎的功能，包括：
+    1. 发送数据包到引擎8199端口(Game -&gt; Engine)
+    2. 在8084监听回传给游戏的数据包(Game &lt;- Engine)
+&quot;&quot;&quot;
+
+
+# 监听的地址和端口
+UDP_IP = &quot;::1&quot;
+UDP_PORT = 8084
+
+# 发送数据的地址和端口
+engine_url = &quot;::1&quot;
+engine_port = 8199
+
+# 创建socket
+sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
+sock.bind((UDP_IP, UDP_PORT))
+
+# 准备数据包
+init_packet = {
+    &quot;func&quot;: &quot;init&quot;,
+    &quot;scene_name&quot;: &quot;雁栖村&quot;,
+    &quot;language&quot;: &quot;C&quot;,
+    &quot;npc&quot;: []
+}
+wakeup_packet = {
+    &quot;func&quot;: &quot;wake_up&quot;,
+    &quot;npc_name&quot;: &quot;王大妈&quot;,
+    &quot;scenario_name&quot;: &quot;李大爷家&quot;,
+    &quot;npc_state&quot;: {
+        &quot;position&quot;: &quot;李大爷家卧室&quot;,
+        &quot;observation&quot;: {
+            &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;隐形李飞飞&quot;],
+            &quot;items&quot;: [&quot;椅子#1&quot;, &quot;椅子#2&quot;, &quot;椅子#3[李大爷占用]&quot;, &quot;床[包括:被子、枕头、床单、床垫、私房钱]&quot;],
+            &quot;locations&quot;: [&quot;李大爷家大门&quot;, &quot;李大爷家后门&quot;, &quot;李大爷家院子&quot;]
+        },
+        &quot;backpack&quot;: [&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+    },
+    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;,
+}
+
+def send_data(data, max_packet_size=6000):
+    # UUID作为消息ID
+    msg_id = uuid.uuid4().hex
+    # 将json字符串转换为bytes
+    data = json.dumps(data).encode('utf-8')
+    # 计算数据包总数
+    packets = [data[i: i + max_packet_size] for i in range(0, len(data), max_packet_size)]
+    total_packets = len(packets)
+    for i, packet in enumerate(packets):
+        # 构造UDP数据包头部
+        header = f&quot;{msg_id}@{i + 1}@{total_packets}&quot;.encode('utf-8')
+        # 发送UDP数据包
+        sock.sendto(header + b&quot;@&quot; + packet, (engine_url, engine_port))
+        print(f&quot;Sent UDP packet: {header.decode('utf-8')}@{packet.decode('utf-8')}&quot;)
+
+def listen():
+    print(&quot;Listening on [{}]:{}&quot;.format(UDP_IP, UDP_PORT))
+    while True:
+        data, addr = sock.recvfrom(4000)
+        # get json packet from udp
+        data = data.decode('utf-8')
+        json_str = data.split('@')[-1]
+        json_data = json.loads(json_str)
+        print(&quot;Received UDP packet from {}: {}&quot;.format(addr, json_data))
+
+def send_packets():
+    while True:
+        send_data(init_packet)
+        send_data(wakeup_packet)
+        time.sleep(10)
+
+# 分别启动监听和发送数据包的线程
+threading.Thread(target=listen).start()
+threading.Thread(target=send_packets).start()
+
+
+</code></pre>
+<h2 id="udp">📜 UDP数据包收发</h2>
+<p>Engine目前发送的响应UDP包是会动态扩增的，如果响应超过了最大包限制，那么Engine就会拆分发送。</p>
+<p>收发包的统一结构为:</p>
+<pre><code class="language-python">  # {msg_id}@{i + 1}@{total_packets}@{json_data}
+  # 例(引擎响应包)： 4bfe6122618b41fa85c8a8eb3ab37993@1@1@{&quot;name&quot;: &quot;action&quot;, &quot;action&quot;: &quot;chat&quot;, &quot;object&quot;: &quot;李大爷&quot;, &quot;parameters&quot;: &quot;李大爷,您知道匈房在哪里吗？&quot;, &quot;npc_name&quot;: &quot;王大姐&quot;}
+</code></pre>
+<h2 id="21-python">2.1 收发包(python)</h2>
+<pre><code class="language-python">import uuid, json, socket
+
+def send_data(data, max_packet_size=6000):
+        engine_url = &quot;::1&quot;
+        engine_port = 8199
+        game_url = &quot;::1&quot;
+        game_port = 8084
+        sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
+        sock.bind((game_url, game_port))
+
+        # UUID作为消息ID
+        msg_id = uuid.uuid4().hex
+        # 将json字符串转换为bytes
+        data = json.dumps(data).encode('utf-8')
+        # 计算数据包总数
+        packets = [data[i: i + max_packet_size] for i in range(0, len(data), max_packet_size)]
+        total_packets = len(packets)
+        for i, packet in enumerate(packets):
+            # 构造UDP数据包头部
+            header = f&quot;{msg_id}@{i + 1}@{total_packets}&quot;.encode('utf-8')
+            # 发送UDP数据包
+            sock.sendto(header + b&quot;@&quot; + packet, (engine_url, engine_port))
+        sock.close()
+
+# 准备数据包
+init_packet = {
+    &quot;func&quot;: &quot;init&quot;,
+    # 必填字段，代表在什么场景初始化
+    &quot;scene_name&quot;: &quot;雁栖村&quot;,
+    &quot;language&quot;: &quot;C&quot;,
+    # 下面是🉑️选
+    &quot;npc&quot;: []
+}
+wakeup_packet = {
+    &quot;func&quot;: &quot;wake_up&quot;,
+    &quot;npc_name&quot;: &quot;王大妈&quot;,
+    &quot;scenario_name&quot;: &quot;李大爷家&quot;,
+    &quot;npc_state&quot;: {
+        &quot;position&quot;: &quot;李大爷家卧室&quot;,
+        &quot;observation&quot;: {
+            &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;隐形李飞飞&quot;],
+            &quot;items&quot;: [&quot;椅子#1&quot;, &quot;椅子#2&quot;, &quot;椅子#3[李大爷占用]&quot;, &quot;床[包括:被子、枕头、床单、床垫、私房钱]&quot;],
+            &quot;locations&quot;: [&quot;李大爷家大门&quot;, &quot;李大爷家后门&quot;, &quot;李大爷家院子&quot;]
+        },
+        &quot;backpack&quot;: [&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+    },
+    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;,  # 游戏世界的时间戳
+}
+# 发送数据包(发送后观察日志或终端)
+send_data(init_packet)
+send_data(wakeup_packet)
+</code></pre>
+<h2 id="22-c">2.2 收发包(C#)</h2>
+<p>在Unity中也是需要对数据包进行处理才可以进行发送的，下面是一个简单的Unity脚本，可以参考一下。</p>
+<pre><code class="language-c#">// 发送UDP包的逻辑
+private void SendData(object data)
 {
     string json = JsonUtility.ToJson(data);  // 提取数据data中的字符串信息
     json = $&quot;@1@1@{json}&quot;;  // 左添加头信息
     byte[] bytes = Encoding.UTF8.GetBytes(json);  // 对字符串数据编码
     this.sock.Send(bytes, bytes.Length, this.targetUrl, this.targetPort);  // 通过socket向目标端口发送数据包
 }
-</code></pre>
-<ul>
-<li>游戏端接收数据包并组装的代码示例（以Unity为例）：</li>
-</ul>
-<pre><code class="language-C#">this.listenThread = new Thread(Listen);
+
+this.listenThread = new Thread(Listen);
 this.listenThread.Start();
 this.thread_stop = false;
 
-//接收包
+//接收UDP包的逻辑(UDP包拼接为完整包)
 public void Listen()
 {
     IPEndPoint localEndPoint = new IPEndPoint(IPAddress.IPv6Loopback, this.listenPort);
@@ -239,298 +364,7 @@ public void Listen()
         }
     }
 }
-</code></pre>
-<h2 id="_6">引擎关闭</h2>
-<p>游戏端通过发送“close”功能数据包给引擎端来请求关闭引擎（详见下文）。</p>
-<h1 id="_7">配置文档</h1>
-<h2 id="_8">配置文件结构</h2>
-<ul>
-<li>python_lib(依赖库)</li>
-<li>code(项目代码)</li>
-<li>npc-engine\<ul>
-<li>logs(运行日志)</li>
-<li>src(源代码)</li>
-<li>config(配置文件)<ul>
-<li>action(场景中允许的动作配置文件)</li>
-<li>chat.json(自定义第一个动作的配置文件)</li>
-<li>...</li>
-<li>npc(npc描述配置文件)</li>
-<li>村长.json(自定义第一个角色的配置文件)</li>
-<li>...</li>
-<li>knowledge(知识、场景配置文件)</li>
-<li>scenes(子场景配置文件)<ul>
-<li>警察局.json(自定义第一个具体场景的配置文件)</li>
-<li>...</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="_9">配置示例</h2>
-<p>-\action\chat.json</p>
-<pre><code class="language-python">{
-  &quot;name&quot;: &quot;chat&quot;,   # 动作名称
-  &quot;definition&quot;: &quot;&lt;chat|person|content&gt;，以扮演的角色身份对[person]说话，内容是[content]&quot;,  # 动作格式化模板
-  &quot;multi_param&quot;: false,  # 是否需要多个输入参数
-  &quot;example&quot;: &quot;&lt;chat|人名A|早上好！&gt;或&lt;chat|人名B|好久不见，最近你去哪里了&gt;等&quot;,  # 根据动作格式化模板写的例子
-  &quot;log_template&quot;:{ 
-    &quot;success&quot;: &quot;{npc_name}对{object}说：{parameters}&quot;,  # 如果动作执行成功则生成该描述信息
-    &quot;fail&quot;: &quot;{npc_name}试图与{object}对话，但是失败了. 原因是{reason}&quot;  # 如果动作执行失败则生成该描述信息
-  }
-}
-</code></pre>
-<p>-\npc\村长.json</p>
-<pre><code class="language-python">{
-    &quot;name&quot;: &quot;村长&quot;,  # 角色姓名
-    &quot;desc&quot;: &quot;村长有着浓密的白色胡须，出生于1940年，喜欢抽中华烟，他白天会在瓜田工作，晚上会在广场上遛弯，如果遇到矛盾他会主持调节，太晚了的时候就会回家睡觉。村长最喜欢吃西瓜。&quot;,  # 角色描述，一般包含外貌、出生日期、兴趣爱好、生活习惯等
-    &quot;mood&quot;: &quot;开心&quot;,   # 当前的角色情绪
-    &quot;npc_state&quot;: {   # 角色当前状态
-        &quot;position&quot;: &quot;李大爷家&quot;,   # 角色所在位置
-        &quot;observation&quot;: {   # 角色观测到的信息
-            &quot;people&quot;: [   # 角色观测到的人
-                &quot;王大妈&quot;,
-                &quot;村长&quot;,
-                &quot;隐形李飞飞&quot;
-            ],
-            &quot;items&quot;: [   # 角色观测到的物体
-                &quot;椅子#1&quot;,
-                &quot;椅子#2&quot;,
-                &quot;椅子#3[李大爷占用]&quot;,
-                &quot;床[包括:被子、枕头、床单、床垫、私房钱]&quot;
-            ],
-            &quot;locations&quot;: [   # 角色观测到的地点
-                &quot;李大爷家大门&quot;,
-                &quot;李大爷家后门&quot;,
-                &quot;李大爷家院子&quot;
-            ]
-        },
-        &quot;backpack&quot;: [   # 角色随身携带的物体
-            &quot;中华烟[剩余4根]&quot;,
-            &quot;1000元&quot;,
-            &quot;吃了一半的西瓜&quot;
-        ]
-    },
-    &quot;memory&quot;: [   # 角色的记忆，一般按照时间顺序列举
-        &quot;11年前由于对村子做出巨大贡献被村民们推举为新一任村长。&quot;,
-        &quot;9年前调节某村民婚礼期间发生的纠纷。&quot;,
-        &quot;7年前管理的村子被评为十佳美丽乡村。&quot;
-    ],
-    &quot;purpose&quot;: &quot;村长想去广场散步，因为他喜欢晚上在广场上遛弯，享受清新的空气和宁静的夜晚。&quot;,   # 角色当前的意图，一般指短期意图
-    &quot;action&quot;: {   # 角色当前执行的动作
-        &quot;action&quot;: &quot;mov&quot;,
-        &quot;object&quot;: &quot;广场&quot;,
-        &quot;parameters&quot;: &quot;&quot;,
-        &quot;npc_name&quot;: &quot;村长&quot;,
-        &quot;name&quot;: &quot;action&quot;
-    }
-}
-</code></pre>
-<p>-\knowledge\scenes\警察局.json</p>
-<pre><code class="language-python">{
- &quot;all_actions&quot;: [&quot;mov&quot;, &quot;get&quot;, &quot;put&quot;, &quot;use&quot;],   # 场景中可支持的动作类型
- &quot;all_places&quot;: [&quot;牢房&quot;, &quot;雁栖村入口&quot;],   # 场景中的子地点
- &quot;all_moods&quot;: [&quot;正常&quot;, &quot;焦急&quot;, &quot;严肃&quot;, &quot;开心&quot;, &quot;伤心&quot;],    #场景中可支持的情绪，一般情况下所有场景的情绪信息是一致的
- &quot;all_people&quot;: [&quot;囚犯阿呆&quot;,&quot;警员1&quot;,&quot;警员2&quot;]   # 场景中的存在的角色名称
- }
-
-</code></pre>
-<h2 id="udp">UDP数据包</h2>
-<h4 id="_10">场景初始化数据包：</h4>
-<p>在引擎初始化或者加载一个新场景的时候，游戏端需要先发送init数据包给引擎端。引擎端才会加载指定场景的NPC。</p>
-<pre><code class="language-python"># 场景初始化的包
-{
-    &quot;func&quot;:&quot;init&quot;,   # 表示该传送的数据包是用于加载场景
-    # 必填字段
-    &quot;scene_name&quot;:&quot;雁栖村&quot;,   # 加载场景的名称，代表在什么场景下初始化
-    &quot;language&quot;:&quot;C&quot;,   # 选择语言版本，“E”表示英文，“C”表示中文。默认且推荐使用中文。
-    # 🉑️选字段
-    &quot;npc&quot;:[
-        {
-            &quot;name&quot;:&quot;李大爷&quot;,
-            &quot;desc&quot;:&quot;是个好人&quot;,
-            &quot;npc_state&quot;: {
-                  &quot;position&quot;: &quot;李大爷家&quot;,
-                  &quot;observation&quot;: {
-                          &quot;people&quot;: [&quot;王大妈&quot;, &quot;村长&quot;, &quot;隐形李飞飞&quot;],
-                          &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
-                          &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
-                                },
-                  &quot;backpack&quot;:[&quot;黄瓜&quot;, &quot;1000元&quot;, &quot;老报纸&quot;]
-                       },
-            &quot;mood&quot;:&quot;正常&quot;,
-            &quot;memory&quot;:[ ]
-        },
-        {
-            &quot;name&quot;:&quot;王大妈&quot;,
-            &quot;desc&quot;:&quot;是个好人&quot;,
-            &quot;npc_state&quot;: {
-                  &quot;position&quot;: &quot;李大爷家&quot;,
-                  &quot;observation&quot;: {
-                          &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;隐形李飞飞&quot;],
-                          &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
-                          &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
-                                },
-                  &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
-                       },
-        &quot;mood&quot;:&quot;焦急&quot;,
-        &quot;memory&quot;:[ ]
-        }], # 可以留空，默认按照gscene.json初始化场景NPC。非空则在之前基础上添加。
-}
-</code></pre>
-<h4 id="_11">引擎关闭数据包</h4>
-<p>在游戏结束的时候，engine需要一个close数据包，用于更新所有NPC的状态到json文件中。</p>
-<pre><code class="language-python"># 引擎关闭的包
-{
-    &quot;func&quot;:&quot;close&quot; # 关闭引擎,并保存所有NPC到json
-}
-</code></pre>
-<h4 id="npc">NPC的动作数据包:</h4>
-<p>NPC不会开始自主行动，除非你发送了wakeup包给它。
-npc-engine接到wakeup包之后，会返回action行为数据包。
-游戏端需要执行对应action，执行最终状态以action_done的形式返回给npc-engine
-engine接收到action_done包之后会继续返回action行为包。</p>
-<pre><code class="language-python"># wakeup包例：
-{
-    &quot;func&quot;:&quot;wake_up&quot;,
-    &quot;npc_name&quot;: &quot;王大妈&quot;,
-
-    &quot;scenario_name&quot;: &quot;李大爷家&quot;, 
-    &quot;npc_state&quot;: {
-      &quot;position&quot;: &quot;李大爷家卧室&quot;,
-      &quot;observation&quot;: {
-              &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;李飞飞&quot;],
-              &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
-              &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
-                    },
-      &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
-    },
-
-    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳 
-}
-
-# action_done包例
-{
-    &quot;func&quot;:&quot;action_done&quot;,
-    &quot;npc_name&quot;:&quot;王大妈&quot;,
-    &quot;status&quot;: &quot;success&quot;,
-    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳
-
-    &quot;scenario_name&quot;: &quot;李大爷家&quot;, 
-    &quot;npc_state&quot;: {
-      &quot;position&quot;: &quot;李大爷家卧室&quot;,
-      &quot;observation&quot;: {
-              &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;李飞飞&quot;],
-              &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
-              &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
-                    },
-      &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
-    },
-
-    &quot;action&quot;:&quot;mov&quot;,
-    &quot;object&quot;:&quot;李大爷家&quot;,  # 之前传过来的动作对象
-    &quot;parameters&quot;:[], # 之前传过来的参数
-    &quot;reason&quot;: &quot;&quot;, # &quot;王大妈在去往‘警察局’的路上被李大爷打断&quot;
-}
-
-# action_done、wakeup发给游戏包后返回的ACTION包
-{
-    &quot;name&quot;:&quot;action&quot;,
-    &quot;npc_name&quot;:&quot;李大妈&quot;,
-    &quot;action&quot;:&quot;mov&quot;,
-    &quot;object&quot;:&quot;李大爷家&quot;,
-    &quot;parameters&quot;:[],
-}
-</code></pre>
-<h4 id="_12">对话相关行为：</h4>
-<p>游戏需要自己确认npc的群体对话触发机制，通常是一个包含固定半径的对话房间。
-发送create_conversation给engine后，engine会根据提供的参数返回一个长剧本包，游戏需要自己实现剧本演出。
-每一行剧本演出完成后，需要发送确认包给engine否则不会有记忆。</p>
-<p>剧本有插入功能，比如玩家要插入对话或者一个新的npc进入了对话，这时候发送re_create_conversation包便可，会重新生成一个考虑到插入npc的接续剧本。</p>
-<pre><code class="language-python"># create_conversation游戏端发给引擎的包
-{
-    &quot;func&quot;: &quot;create_conversation&quot;,
-    &quot;npc&quot;: [&quot;王大妈&quot;,&quot;李大爷&quot;],   # npc列表
-
-    &quot;scenario_name&quot;: &quot;李大爷家&quot;,        
-    &quot;location&quot;: &quot;李大爷家卧室&quot;,
-    &quot;topic&quot;: &quot;王大妈想要切了自己的西瓜给李大爷吃，并收钱&quot;, # 可以留空，会自动生成topic
-    &quot;npc_states&quot;: [   # 该列表中的每个状态对应于npc列表的相应角色名称
-                {
-                  &quot;position&quot;: &quot;李大爷家&quot;,
-                  &quot;observation&quot;: {
-                          &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;隐形李飞飞&quot;],
-                          &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
-                          &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
-                                },
-                  &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
-                },
-                {
-                  &quot;position&quot;: &quot;李大爷家&quot;,
-                  &quot;observation&quot;: {
-                          &quot;people&quot;: [&quot;王大妈&quot;, &quot;村长&quot;, &quot;隐形李飞飞&quot;],
-                          &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
-                          &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
-                                },
-                  &quot;backpack&quot;:[&quot;黄瓜&quot;, &quot;1000元&quot;, &quot;老报纸&quot;]
-                },
-                ],
-    &quot;starting&quot;: &quot;你好，嫩们在干啥腻？&quot;,  # 玩家说的话，可选留空
-    &quot;player_desc&quot;: &quot;玩家是一个疯狂的冒险者，喜欢吃圆圆的东西&quot;,  # 玩家的描述，可选留空
-    &quot;memory_k&quot;: 3,  # npc的记忆检索条数，必须填写
-    &quot;length&quot;: &quot;M&quot;  # 可以选择的剧本长度，S M L X 可选。 
-}
-
-# 引擎端创造并生成剧本后传给游戏端的数据包
-{
-    &quot;name&quot;: &quot;conversation&quot;,
-    &quot;id&quot;: &quot;123456789&quot;,  # conversation对象的索引号
-    &quot;length&quot;: &quot;M&quot;,  # 可以选择的剧本长度，S M L X 可选。 
-    &quot;location&quot;: &quot;李大爷家&quot;,  # 对话发生所在的地点
-    &quot;lines&quot;: [line1, line2, line3, line4, ...]  # 剧本信息，由若干行对话组成的序列
-}
-
-# 引擎端生成剧本的每一行的格式
-{
-    &quot;type&quot;: &quot;Interaction&quot;,  # 剧本行的类型，可以是State，Interaction，Error
-    &quot;state&quot;: &quot;李大爷退出。剩下的角色：王大妈&quot;,  # 当剧本行类型是State和Error时，&quot;state&quot;才会有具体内容
-    &quot;name&quot;: &quot;李大爷&quot;,  # 剧本行对应的角色姓名，当剧本行类型是Interaction时才不为空
-    &quot;mood&quot;: &quot;开心&quot;,  # 剧本行对应角色的情绪，当剧本行类型是Interaction时才不为空
-    &quot;words&quot;: &quot;我喜好吃西瓜&quot;,  # 剧本行对应角色的说话内容，当剧本行类型是Interaction时才不为空
-    &quot;action&quot;: {
-              &quot;type&quot;: &quot;对话&quot;,
-              &quot;args&quot;: &quot;王大妈&quot;}  # 剧本行对应角色的动作，当剧本行类型是Interaction时不为空
-}
-
-# 游戏端传给引擎端的剧本演示确认包
-{
-    &quot;func&quot;: &quot;confirm_conversation_line&quot;,
-    &quot;conversation_id&quot;: &quot;123456789&quot;,  # conversation对象的索引号
-    &quot;index&quot;: 2,  # 游戏端展示完成的剧本行索引号
-}
-
-# re_create_conversation游戏端发给引擎的包
-{
-    &quot;func&quot;: &quot;re_create_conversation&quot;,
-    &quot;id&quot;: &quot;123456789&quot;,  # conversation对象的索引号
-    &quot;character&quot;: &quot;警长&quot;,  # 新加入角色的名称
-    &quot;interruption&quot;: &quot;大家好呀，你们刚刚在说什么&quot;,  # 玩家插入的说话内容
-    &quot;player_desc&quot;: &quot;玩家是一个疯狂的冒险者，喜欢吃圆圆的东西&quot;,  # 玩家的描述，可选留空
-    &quot;length&quot;: &quot;M&quot;  # 可以选择的剧本长度，S M L X 可选。 
-}
-
-</code></pre>
-<h3 id="_13">引擎交互注意事项</h3>
-<ul>
-<li>游戏端发送init包后，引擎端会读取数据包中场景名称所对应的配置文件scene_name.json，然后初始化场景。</li>
-<li>如果init数据包中包含npc信息，那么引擎端会默认从该数据包中读入角色信息；如果不包含，则引擎端会从scene_name.json配置文件中读入角色信息。</li>
-<li>每个场景配置文件scene_name.json中的可支持动作和存在的角色名称都需要在\action和\npc中进行定义，如果未定义则会报错。</li>
-<li>每个npc在游戏中的自主行动需要游戏端对针对该角色向引擎端发送wakeup包来实现的。</li>
-<li>长时间没有自主行为的npc需要游戏端自行检测，发送wakeup包到引擎进行再次唤醒</li>
-<li>引擎端接收wakeup包后会生成npc的动作并返回action包给游戏端</li>
-<li>游戏端执行对应的action包之后，需要发送action_done包到引擎，这样引擎才会继续生成npc下一步行为。</li>
-</ul></div>
+</code></pre></div>
             </div>
         </div>
 

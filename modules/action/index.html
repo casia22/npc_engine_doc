@@ -42,6 +42,10 @@
 </li>
                                     
 <li>
+    <a href="../../tutorials/engine/" class="dropdown-item">0 - Engine Configuration</a>
+</li>
+                                    
+<li>
     <a href="../../tutorials/npc/" class="dropdown-item">1 - NPC Configuration</a>
 </li>
                                     
@@ -113,12 +117,81 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#npc-action" class="nav-link">NPC Action模块简述</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#actionudp" class="nav-link">Action模块UDP请求例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h2 id="npc-action">NPC Action模块简述</h2>
+<p><img alt="Action" src="../../img/action_module.png" />
+NPC不会开始自主行动，除非你发送了wakeup包给它。
+npc-engine接到wakeup包之后，会返回action行为数据包。
+游戏端需要执行对应action，执行最终状态以action_done的形式返回给npc-engine,
+engine接收到action_done包之后会继续返回action行为包。</p>
+<h2 id="actionudp">Action模块UDP请求例</h2>
+<pre><code class="language-python"># wakeup包例：
+{
+    &quot;func&quot;:&quot;wake_up&quot;,
+    &quot;npc_name&quot;: &quot;王大妈&quot;,
+
+    &quot;scenario_name&quot;: &quot;李大爷家&quot;, 
+    &quot;npc_state&quot;: {
+      &quot;position&quot;: &quot;李大爷家卧室&quot;,
+      &quot;observation&quot;: {
+              &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;李飞飞&quot;],
+              &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
+              &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
+                    },
+      &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+    },
+
+    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳 
+}
+
+# action_done包例
+{
+    &quot;func&quot;:&quot;action_done&quot;,
+    &quot;npc_name&quot;:&quot;王大妈&quot;,
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳
+
+    &quot;scenario_name&quot;: &quot;李大爷家&quot;, 
+    &quot;npc_state&quot;: {
+      &quot;position&quot;: &quot;李大爷家卧室&quot;,
+      &quot;observation&quot;: {
+              &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;李飞飞&quot;],
+              &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
+              &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
+                    },
+      &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+    },
+
+    &quot;action&quot;:&quot;mov&quot;,
+    &quot;object&quot;:&quot;李大爷家&quot;,  # 之前传过来的动作对象
+    &quot;parameters&quot;:[], # 之前传过来的参数
+    &quot;reason&quot;: &quot;&quot;, # &quot;王大妈在去往‘警察局’的路上被李大爷打断&quot;
+}
+</code></pre>
+<h3 id="action">Action模块响应数据包例：</h3>
+<pre><code class="language-python"># action_done、wakeup发给游戏包后返回的ACTION包
+{
+    &quot;name&quot;:&quot;action&quot;,
+    &quot;npc_name&quot;:&quot;李大妈&quot;,
+    &quot;action&quot;:&quot;mov&quot;,
+    &quot;object&quot;:&quot;李大爷家&quot;,
+    &quot;parameters&quot;:[],
+}
+</code></pre></div>
             </div>
         </div>
 
