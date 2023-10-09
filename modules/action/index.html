@@ -73,6 +73,10 @@
 <li>
     <a href="./" class="dropdown-item active">Action Module</a>
 </li>
+                                    
+<li>
+    <a href="../talk/" class="dropdown-item">Talk Module</a>
+</li>
                                 </ul>
                             </li>
                             <li class="navitem">
@@ -92,7 +96,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../talk/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -135,10 +139,11 @@
 <h2 id="npc-action">NPC Action模块简述</h2>
 <p><img alt="Action" src="../../img/action_module.png" />
 NPC不会开始自主行动，除非你发送了wakeup包给它。
-npc-engine接到wakeup包之后，会返回action行为数据包。
-游戏端需要执行对应action，执行最终状态以action_done的形式返回给npc-engine,
-engine接收到action_done包之后会继续返回action行为包。</p>
+npc-engine接到<a href="./#wakeup包例">wakeup包</a>之后，会返回<a href="./#action模块响应数据包例">action行为数据包</a>。
+游戏端需要执行对应action，执行最终状态以<a href="./#actiondone包例">action_done包</a>的形式返回给npc-engine,
+engine接收到<a href="./#actiondone包例">action_done包</a>之后会继续返回action行为包。</p>
 <h2 id="actionudp">Action模块UDP请求例</h2>
+<h3 id="wakeup">wakeup包例：</h3>
 <pre><code class="language-python"># wakeup包例：
 {
     &quot;func&quot;:&quot;wake_up&quot;,
@@ -157,8 +162,9 @@ engine接收到action_done包之后会继续返回action行为包。</p>
 
     &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳 
 }
-
-# action_done包例
+</code></pre>
+<h3 id="action_done">action_done包例：</h3>
+<pre><code class="language-python"># action_done包例
 {
     &quot;func&quot;:&quot;action_done&quot;,
     &quot;npc_name&quot;:&quot;王大妈&quot;,
@@ -182,7 +188,7 @@ engine接收到action_done包之后会继续返回action行为包。</p>
     &quot;reason&quot;: &quot;&quot;, # &quot;王大妈在去往‘警察局’的路上被李大爷打断&quot;
 }
 </code></pre>
-<h3 id="action">Action模块响应数据包例：</h3>
+<h3 id="action">Action模块响应数据包例</h3>
 <pre><code class="language-python"># action_done、wakeup发给游戏包后返回的ACTION包
 {
     &quot;name&quot;:&quot;action&quot;,

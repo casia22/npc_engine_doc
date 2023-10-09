@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>2 - Scenario Configuration - CogniMatrix NPC Engine</title>
+        <title>Talk Module - CogniMatrix NPC Engine</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -33,49 +33,49 @@
                             <li class="navitem">
                                 <a href="../.." class="nav-link">Home</a>
                             </li>
-                            <li class="dropdown active">
+                            <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorial <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../quickstart/" class="dropdown-item">Quickstart</a>
+    <a href="../../tutorials/quickstart/" class="dropdown-item">Quickstart</a>
 </li>
                                     
 <li>
-    <a href="../engine/" class="dropdown-item">0 - Engine Configuration</a>
+    <a href="../../tutorials/engine/" class="dropdown-item">0 - Engine Configuration</a>
 </li>
                                     
 <li>
-    <a href="../npc/" class="dropdown-item">1 - NPC Configuration</a>
+    <a href="../../tutorials/npc/" class="dropdown-item">1 - NPC Configuration</a>
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">2 - Scenario Configuration</a>
+    <a href="../../tutorials/scenario/" class="dropdown-item">2 - Scenario Configuration</a>
 </li>
                                     
 <li>
-    <a href="../action/" class="dropdown-item">3 - Action Configuration</a>
+    <a href="../../tutorials/action/" class="dropdown-item">3 - Action Configuration</a>
 </li>
                                     
 <li>
-    <a href="../debug/" class="dropdown-item">4 - Debugging</a>
+    <a href="../../tutorials/debug/" class="dropdown-item">4 - Debugging</a>
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Modules <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../../modules/conversation/" class="dropdown-item">Conversation Module</a>
+    <a href="../conversation/" class="dropdown-item">Conversation Module</a>
 </li>
                                     
 <li>
-    <a href="../../modules/action/" class="dropdown-item">Action Module</a>
+    <a href="../action/" class="dropdown-item">Action Module</a>
 </li>
                                     
 <li>
-    <a href="../../modules/talk/" class="dropdown-item">Talk Module</a>
+    <a href="./" class="dropdown-item active">Talk Module</a>
 </li>
                                 </ul>
                             </li>
@@ -91,17 +91,17 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../npc/" class="nav-link">
+                                <a rel="prev" href="../action/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../action/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/tutorials/scenario.md" class="nav-link">Edit on casia22/npc_engine.github.io
+                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/modules/talk.md" class="nav-link">Edit on casia22/npc_engine.github.io
                                     </a>
                             </li>
                     </ul>
@@ -122,17 +122,17 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#scenario" class="nav-link">Scenario配置总览</a>
+            <li class="nav-item" data-level="2"><a href="#player2npc-talk" class="nav-link">Player2NPC Talk模块简述</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#scenario_1" class="nav-link">Scenario配置方法</a>
+            <li class="nav-item" data-level="2"><a href="#talkudp" class="nav-link">Talk模块UDP请求例</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">配置文件初始化</a>
+            <li class="nav-item" data-level="2"><a href="#talk" class="nav-link">Talk模块响应数据包</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -141,31 +141,67 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="scenario">Scenario配置总览</h2>
-<p>场景配置文件在npc_engine/src/config/knowledge/scenes/文件夹下，以json格式存储。</p>
-<p>Scenario规范了子场景中的路点，动作空间，情绪空间等。更重要的是决定了哪些NPC会在该场景下被加载到内存中。</p>
-<p>场景.json通过init包初始化，决定初始化哪些NPC和这些NPC的动作空间。</p>
-<p>Scenario文件是NPC Engine的核心配置文件，它组织了NPC、Action和Knowledge的关系。</p>
-<h2 id="scenario_1">Scenario配置方法</h2>
-<p>Scenario(场景)例子如下:</p>
-<pre><code class="language-python"># npc_engine/src/config/knowledge/scenes/警察局.json
+<h2 id="player2npc-talk">Player2NPC Talk模块简述</h2>
+<p><img alt="Action" src="../../img/player2npc.png" />
+玩家可以通过talk模块与NPC进行对话，对话的内容仅支持文字。
+开发者在的到玩家的文字输入后，整合UDP<a href="./#talk模块udp请求例">对话包</a>，发送给npc-engine，
+npc-engine会返回该NPC的回答、动作调用的<a href="./#talk模块响应数据包">复合包</a>。
+目前，该功能还不支持流响应。请求返回时间大概在2-5秒左右，引入流响应后，可以将返回时间缩短到1秒以内。</p>
+<p>engine会返回一个包含action和answer的<a href="./#talk模块udp请求例">对话包</a>给游戏端，游戏端可自行决定是否发送<a href="../action/#actiondone包例">action_done包</a>给engine(本模块记忆不需要发送确认包来添加)。</p>
+<h2 id="talkudp">Talk模块UDP请求例</h2>
+<pre><code class="language-python"># player2npc的对话包
+player2npc_packet = {
+    &quot;func&quot;:&quot;talk2npc&quot;,
+    &quot;npc_name&quot;:&quot;警员1&quot;,
+    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳
+
+    # NPC的状态
+    &quot;scenario_name&quot;: &quot;警察局&quot;,
+    &quot;npc_state&quot;: {
+      &quot;position&quot;: &quot;雁栖村入口&quot;,
+      &quot;observation&quot;: {
+              &quot;people&quot;: [&quot;囚犯阿呆&quot;,&quot;警员2&quot;,&quot;旅行者小王&quot;],
+              &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
+              &quot;locations&quot;: ['牢房', '雁栖村入口']
+                    },
+      &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+    },
+    # player的信息
+    &quot;player_name&quot;:&quot;旅行者小王&quot;,  # player的名字
+    &quot;speech_content&quot;:&quot;你好，我是旅行者小王, 我要报警, 在林区中好像有人偷砍树&quot;,  # player说的话
+    &quot;items_visible&quot;: [&quot;金丝眼镜&quot;, &quot;旅行签证&quot;, &quot;望远镜&quot;],  # player身上的物品
+    &quot;state&quot;: &quot;旅行者小王正在严肃地站着，衣冠规整，手扶着金丝眼镜&quot;,  # player状态的自然语言描述，开发者可以随意添加
+}
+
+# action_done包例
 {
- &quot;all_actions&quot;: [&quot;mov&quot;, &quot;get&quot;, &quot;put&quot;, &quot;use&quot;], # 场景中可支持的Action类型
- &quot;all_places&quot;: [&quot;牢房&quot;, &quot;雁栖村入口&quot;], # 场景中的子地点(用于NPC移动的参数，可视作场景子地点)
- &quot;all_moods&quot;: [&quot;正常&quot;, &quot;焦急&quot;, &quot;严肃&quot;, &quot;开心&quot;, &quot;伤心&quot;], # 场景中可支持的情绪，一般情况下所有场景的情绪信息是一致的
- &quot;all_people&quot;: [&quot;囚犯阿呆&quot;,&quot;警员1&quot;,&quot;警员2&quot;] # 场景中的存在的NPC，会在[场景初始化]时加载到内存中
- }
+    &quot;func&quot;:&quot;action_done&quot;,
+    &quot;npc_name&quot;:&quot;王大妈&quot;,
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;time&quot;: &quot;2021-01-01 12:00:00&quot;, # 游戏世界的时间戳
+
+    &quot;scenario_name&quot;: &quot;李大爷家&quot;, 
+    &quot;npc_state&quot;: {
+      &quot;position&quot;: &quot;李大爷家卧室&quot;,
+      &quot;observation&quot;: {
+              &quot;people&quot;: [&quot;李大爷&quot;, &quot;村长&quot;, &quot;李飞飞&quot;],
+              &quot;items&quot;: [&quot;椅子#1&quot;,&quot;椅子#2&quot;,&quot;椅子#3[李大爷占用]&quot;,&quot;床&quot;],
+              &quot;locations&quot;: [&quot;李大爷家大门&quot;,&quot;李大爷家后门&quot;,&quot;李大爷家院子&quot;]
+                    },
+      &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
+    },
+
+    &quot;action&quot;:&quot;mov&quot;,
+    &quot;object&quot;:&quot;李大爷家&quot;,  # 之前传过来的动作对象
+    &quot;parameters&quot;:[], # 之前传过来的参数
+    &quot;reason&quot;: &quot;&quot;, # &quot;王大妈在去往‘警察局’的路上被李大爷打断&quot;
+}
 </code></pre>
-<h2 id="_1">配置文件初始化</h2>
-<p>Scenario配置文件在npc_engine/src/config/knowledge/scenes/文件夹下配置完成后，则会在引擎启动的时候被加载到内存中。</p>
-<p>当游戏切入到一个场景的时候，需发送一个init包到引擎端，引擎会根据你发送的场景名字来加载对应的场景配置文件中的NPC。</p>
-<p>一个初始化场景的例子如下:</p>
-<pre><code class="language-python"># npc_engine/src/config/knowledge/scenes/警察局.json
-{
- &quot;func&quot;: &quot;init&quot;, # 初始化场景
- &quot;scene_name&quot;: &quot;警察局&quot;, # 场景名字,会去加载对应的场景配置文件.json
- &quot;language&quot;: &quot;C&quot;, # 语言
- &quot;npc&quot;: [] # 场景中的存在的NPC，会在[场景初始化]时加载到内存中
+<h2 id="talk">Talk模块响应数据包</h2>
+<pre><code class="language-python">{&quot;name&quot;: &quot;talk_result&quot;, 
+ &quot;npc_name&quot;: &quot;警员1&quot;,  # NPC 名字 
+ &quot;answer&quot;: &quot;旅行者小王，请跟我来，我需要你协助我前往林区查看。&quot;,  # NPC 回答
+ &quot;actions&quot;: [{&quot;action&quot;: &quot;mov&quot;, &quot;object&quot;: &quot;林区&quot;, &quot;parameters&quot;: &quot;&quot;, &quot;npc_name&quot;: &quot;警员1&quot;}] # NPC动作调用(开发者可选择性使用)
  }
 </code></pre></div>
             </div>
