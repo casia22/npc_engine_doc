@@ -264,6 +264,7 @@
                   &quot;backpack&quot;:[&quot;黄瓜&quot;, &quot;1000元&quot;, &quot;老报纸&quot;]
                        },
             &quot;mood&quot;:&quot;正常&quot;,
+            &quot;action_space&quot;: [&quot;mov&quot;, &quot;chat&quot;],  # 人物的动作空间(在实际执行的时候，场景的all_actions和人物action_space取交集) 
             &quot;memory&quot;:[ ]
         },
         {
@@ -279,8 +280,9 @@
                   &quot;backpack&quot;:[&quot;优质西瓜&quot;, &quot;大砍刀&quot;, &quot;黄金首饰&quot;]
                        },
         &quot;mood&quot;:&quot;焦急&quot;,
+        &quot;action_space&quot;: [&quot;mov&quot;, &quot;chat&quot;],  # 人物的动作空间(在实际执行的时候，场景的all_actions和人物action_space取交集)
         &quot;memory&quot;:[ ]
-        }], # 可以留空，默认按照gscene.json初始化场景NPC。非空则在之前基础上添加。
+        }], # 可以留空，默认按照scene.json初始化场景NPC。非空则在之前基础上添加。
 }
 </code></pre>
 <h2 id="32">3.2 引擎关闭数据包</h2>
