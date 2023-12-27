@@ -79,6 +79,27 @@
 </li>
                                 </ul>
                             </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Download <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Windows</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Mac(intel)</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Mac(apple silicon)</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">linux</a>
+</li>
+                                </ul>
+                            </li>
                             <li class="navitem">
                                 <a href="../../feedback.md" class="nav-link">Feedback</a>
                             </li>
@@ -101,8 +122,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/tutorials/action.md" class="nav-link">Edit on casia22/npc_engine.github.io
-                                    </a>
+                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/tutorials/action.md" class="nav-link"><i class="fa fa-github"></i> Edit on GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -142,12 +162,12 @@
                     <div class="col-md-9" role="main">
 
 <h2 id="action">Action配置总览</h2>
-<p>Action配置文件在npc_engine/src/config/action/文件夹下，以json格式存储。</p>
+<p>Action配置文件在project/config/action/文件夹下，以json格式存储。</p>
 <p>Action模块支持开发者通过<a href="#action配置例">配置文件</a>的方式定义NPC的具体行为。</p>
 <p>Action模块和<a href="../scenario/#Scenario配置方法">Scenario配置文件</a>结合，可以控制NPC在不同场景下的动作空间。</p>
 <h2 id="action_1">Action配置例</h2>
 <p>Action(动作)例子如下:</p>
-<pre><code class="language-python"># npc_engine/src/config/action/get.json
+<pre><code class="language-python"># project/config/action/get.json
 {
   # 动作名字。支持自定义，最好具有代表性。
   &quot;name&quot;: &quot;get&quot;, 

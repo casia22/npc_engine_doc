@@ -79,6 +79,27 @@
 </li>
                                 </ul>
                             </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Download <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Windows</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Mac(intel)</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Mac(apple silicon)</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">linux</a>
+</li>
+                                </ul>
+                            </li>
                             <li class="navitem">
                                 <a href="../../feedback.md" class="nav-link">Feedback</a>
                             </li>
@@ -101,8 +122,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/tutorials/npc.md" class="nav-link">Edit on casia22/npc_engine.github.io
-                                    </a>
+                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/tutorials/npc.md" class="nav-link"><i class="fa fa-github"></i> Edit on GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -147,16 +167,16 @@
                     <div class="col-md-9" role="main">
 
 <h2 id="npc">NPC配置总览</h2>
-<p>NPC的配置文件在npc_engine/src/config/npc/目录下，以json格式存储，每个NPC一个文件，文件名为NPC的姓名。</p>
+<p>NPC的配置文件在project/config/npc/目录下，以json格式存储，每个NPC一个文件，文件名为NPC的姓名。</p>
 <p>NPC的初始化有两种方式，一种是通过<a href="#配置文件初始化">NPC配置文件</a>，一种是通过<a href="#udp方式初始化">UDP数据包</a>。</p>
 <p>支持对NPC的人设、记忆、情绪、状态进行配置。</p>
 <h2 id="npc_1">NPC配置方法</h2>
 <h2 id="_1">配置文件初始化</h2>
-<p>绝大多数NPC都应当以 “NPC_NAME.json”的方式放在npc_engine/src/config/npc/目录下，然后在Scenario配置文件中引用。</p>
+<p>绝大多数NPC都应当以 “NPC_NAME.json”的方式放在project/config/npc/目录下，然后在Scenario配置文件中引用。</p>
 <p>在Scenario初始化的时候，会自动读取NPC的配置文件，将NPC的初始状态加载到引擎。</p>
 <p>如果一个NPC在多个Scenario中被初始化，只有第一次是有效的，后续的初始化会被忽略。
 下面是一个例子：</p>
-<pre><code class="language-python"># npc_engine/src/config/npc/村长.json
+<pre><code class="language-python"># project/config/npc/村长.json
 {
     &quot;name&quot;: &quot;村长&quot;,  # 角色姓名
     &quot;desc&quot;: &quot;村长有着浓密的白色胡须，出生于1940年，喜欢抽中华烟，他白天会在瓜田工作，晚上会在广场上遛弯，如果遇到矛盾他会主持调节，太晚了的时候就会回家睡觉。村长最喜欢吃西瓜。&quot;,  # 角色描述，一般包含外貌、出生日期、兴趣爱好、生活习惯等
@@ -205,7 +225,7 @@
 </code></pre>
 <h2 id="udp">UDP方式初始化</h2>
 <p>UDP方式是对NPC配置文件的补充，可以在游戏运行过程中动态的添加新的NPC。(存在则覆盖)</p>
-<p>Engine关闭后，新NPC的状态会被保存到npc_engine/src/config/npc/目录下的NPC配置文件中。</p>
+<p>Engine关闭后，新NPC的状态会被保存到project/config/npc/目录下的NPC配置文件中。</p>
 <pre><code class="language-python">init_packet = {
     &quot;func&quot;: &quot;init&quot;,
     # 必填字段，代表在什么场景初始化

@@ -79,6 +79,27 @@
 </li>
                                 </ul>
                             </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Download <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Windows</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Mac(intel)</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Mac(apple silicon)</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">linux</a>
+</li>
+                                </ul>
+                            </li>
                             <li class="navitem">
                                 <a href="../../feedback.md" class="nav-link">Feedback</a>
                             </li>
@@ -101,8 +122,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/tutorials/engine.md" class="nav-link">Edit on casia22/npc_engine.github.io
-                                    </a>
+                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/tutorials/engine.md" class="nav-link"><i class="fa fa-github"></i> Edit on GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -193,7 +213,7 @@
 
 <h2 id="_1">📜引擎使用说明</h2>
 <p><img alt="overview" src="../../img/overview.png" /></p>
-<h3 id="npc_engine">npc_engine的开发流程</h3>
+<h3 id="nuwa">nuwa的开发流程</h3>
 <ul>
 <li><a href="#1.1 引擎配置">引擎配置</a></li>
 <li><a href="#1.2 引擎启动">启动引擎</a></li>
@@ -201,15 +221,15 @@
 <li><a href="#1.4 引擎关闭">关闭引擎</a></li>
 </ul>
 <h2 id="11">1.1 引擎配置</h2>
-<p>在使用之前，开发者需要更新维护引擎的配置文件，配置文件位于<strong>npc_engine/Config</strong>文件夹中，包括：</p>
+<p>在使用之前，开发者需要更新维护引擎的配置文件，配置文件位于<strong>nuwa/Config</strong>文件夹中，包括：</p>
 <ul>
-<li>OpenAI API的配置文件: src/config/openai_config.json </li>
-<li><a href="../action/#action配置例">动作配置文件</a>: src/config/action/your_action_XXX.json</li>
-<li><a href="../npc/#配置文件初始化">NPC配置文件</a>: src/config/npc/your_npc_nameXXX.json</li>
-<li><a href="../scenario/#scenario配置方法">场景配置文件</a>: src/config/knowledge/scenes/your_scenario_nameXXX.json</li>
+<li>OpenAI API的配置文件: project/config/openai_config.json </li>
+<li><a href="../action/#action配置例">动作配置文件</a>: project/config/action/your_action_XXX.json</li>
+<li><a href="../npc/#配置文件初始化">NPC配置文件</a>: project/config/npc/your_npc_nameXXX.json</li>
+<li><a href="../scenario/#scenario配置方法">场景配置文件</a>: project/config/knowledge/scenes/your_scenario_nameXXX.json</li>
 </ul>
 <h2 id="12">1.2 引擎启动</h2>
-<p>引擎可以使用对应平台的<strong>运行脚本</strong>(windows下是.bat)或者手动使用<strong>python src/engine.py</strong>运行。</p>
+<p>引擎可以使用对应平台的<a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html"><strong>发行版</strong></a>，通过脚本或程序执行./nuwa来拉起引擎。</p>
 <h2 id="13">1.3 引擎交互</h2>
 <p>引擎端和游戏端通过UDP数据包按照<a href="#udp">UDP数据包格式</a>进行交互，引擎端默认在8199端口监听游戏端数据包，游戏端默认在8084端口监听引擎端数据包。</p>
 <h2 id="14">1.4 引擎关闭</h2>
@@ -217,9 +237,9 @@
 <h2 id="_2">✨配置文件结构</h2>
 <h2 id="21">2.1 项目目录结构</h2>
 <ul>
-<li>python_lib(依赖库)</li>
-<li>code(项目代码)</li>
-<li>npc-engine\<ul>
+<li>dist(项目代码)</li>
+<li>nuwa.exe (引擎执行入口) </li>
+<li>project\<ul>
 <li>logs(运行日志)</li>
 <li>src(源代码)</li>
 <li>config(配置文件)<ul>

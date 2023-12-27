@@ -79,6 +79,27 @@
 </li>
                                 </ul>
                             </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Download <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Windows</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Mac(intel)</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">Mac(apple silicon)</a>
+</li>
+                                    
+<li>
+    <a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html" class="dropdown-item">linux</a>
+</li>
+                                </ul>
+                            </li>
                             <li class="navitem">
                                 <a href="feedback.md" class="nav-link">Feedback</a>
                             </li>
@@ -101,8 +122,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/index.md" class="nav-link">Edit on casia22/npc_engine.github.io
-                                    </a>
+                                <a href="https://github.com/casia22/npc_engine.github.io/edit/master/docs/index.md" class="nav-link"><i class="fa fa-github"></i> Edit on GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -122,7 +142,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#npc-engine" class="nav-link">🎮 NPC-Engine 🚀</a>
+            <li class="nav-item" data-level="1"><a href="#nuwa-engine" class="nav-link">Nuwa-Engine</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">引擎简介</a>
               <ul class="nav flex-column">
@@ -132,7 +152,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">开发者安装</a>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">下载/安装</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -147,15 +167,17 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="npc-engine">🎮 NPC-Engine 🚀</h1>
-<p>NPC-Engine 是一个由 CogniMatrix™️ 提供的游戏AI引擎，它赋予游戏AI以群体智能。</p>
+<h1 id="nuwa-engine">Nuwa-Engine</h1>
+<p>Nuwa(女娲) 是一个由 <a href="http://www.cognimatrix.games/">CogniMatrix</a>™️ 提供的游戏AI引擎，将Nlp技术和游戏工业结合，赋予游戏NPC以自然语言驱动的智能表现。</p>
 <p><img alt="Author Badge" src="https://img.shields.io/badge/author-CogniMatrix-blue" />
-<a href="https://docs.cognimatrix.games/npc_engine_doc/"><img alt="Documentation" src="https://img.shields.io/badge/Documentation-Available-blue" /></a>
-<a href="https://discord.com/channels/1159008679308308480/1159008679308308483"><img alt="Discord Chat" src="https://img.shields.io/badge/Discord-Chat-blue" /></a></p>
+<a href="https://docs.cognimatrix.games/nuwa_doc/"><img alt="Documentation" src="https://img.shields.io/badge/Documentation-Available-blue" /></a>
+<a href="https://discord.com/channels/1159008679308308480/1159008679308308483"><img alt="Discord Chat" src="https://img.shields.io/badge/Discord-Chat-blue" /></a>
+<a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html"><img alt="Downloads" src="https://img.shields.io/badge/Downloads-Available-blue" /></a></p>
 <h2 id="_1"><strong>引擎简介</strong></h2>
-<p>CogniMatrix™️ <a href="https://github.com/casia22/npc-engine">NPC-Engine</a> 是一个解耦地通过<a href="tutorials/engine/#udp">UDP数据包</a>传输来为游戏NPC提供<a href="modules/conversation/">对话</a>、<a href="modules/action/">动作决策功能</a>的组件。</p>
-<p>产品的设计理念是：<strong>"低成本，本地化“</strong>。</p>
+<p>CogniMatrix™️ <a href="https://github.com/casia22/npc-engine">女娲</a> 是一个解耦地通过<a href="tutorials/engine/#udp">UDP数据包</a>传输来为游戏NPC提供<a href="modules/conversation/">对话</a>、<a href="modules/action/">动作决策功能</a>的组件。</p>
+<p>其设计理念是：<strong>"低成本，本地化“</strong>。</p>
 <p>我们希望通过最小的成本，<a href="tutorials/engine/#11-引擎配置">最简单的配置</a>，最快的部署，来实现一个可以用于单机游戏、社会模拟、数字员工等多种场景的NPC引擎。</p>
+<p>Nuwa针对商业项目提供了<a href="http://www.cognimatrix.games/">商业授权</a>，非盈利项目免费。</p>
 <h2 id="_2"><strong>项目阶段</strong></h2>
 <h5 id="1-api">方案1⃣️: 线上API模式(已实现)</h5>
 <p>线上API模式会产生一定延迟和持续的费用，这对于单机游戏来说是难以接受的。
@@ -166,18 +188,25 @@
 <h5 id="3">方案3⃣️: 混合模式(开发中)</h5>
 <p>混合模式中，本地LLM、线上LLM和历史缓存都会被用于NPC的行为决策，以达到最佳的性能、体验、成本的均衡。</p>
 <p><img alt="solution" src="img/solution2.png" /></p>
-<h2 id="_3"><strong>开发者安装</strong></h2>
-<p>本项目免安装，直接在发行版中运行start_engine.bat脚本就可以</p>
+<h2 id="_3"><strong>下载/安装</strong></h2>
+<p><a href="https://nuwa-release.s3.us-west-2.amazonaws.com/index.html">Nuwa引擎</a>免安装，运行nuwa、nuwa.exe或通过代码拉起nuwa即可。</p>
+<pre><code class="language-shell">## 命令行 ##
+##mac/linux##
+./nuwa
+##windows##
+./nuwa.exe
+</code></pre>
+<p>您只需在项目目录(./project)中进行自定义配置即可满足您定制化需要</p>
 <h2 id="_4"><strong>项目进展</strong></h2>
 <h3 id="_5">🚀 <strong>开发进度</strong>：</h3>
 <ul>
 <li>[x] 🔨 工程化代码</li>
-<li>[ ] 🧪 完成测试用例 (进行中)</li>
 <li>[x] 🤖 NPC决策</li>
-<li>[ ] 💬 添加单人对话</li>
-<li>[ ] 📝 完善文档 (进行中)</li>
+<li>[x] 💬 添加单人对话</li>
+<li>[x] 📝 完善文档 (进行中)</li>
 <li>[x] 🗃️ 本地向量数据库</li>
 <li>[x] 🧠 本地embedding模型</li>
+<li>[ ] 🧪 完成测试用例 (进行中)</li>
 <li>[ ] 💡 添加基于embedding搜索的action决策</li>
 <li>[ ] 🔄 场景切换的大模型功能</li>
 </ul>
@@ -186,11 +215,14 @@
 <li>🗓️ 2023年6月: 项目开始，实现对话房间功能</li>
 <li>🗓️ 2023年7/8月: 实现NPC action功能</li>
 <li>🎈 2023年9月16日: DEMO小镇运行成功，代码初步可用</li>
+<li>🗓 2023年10月4日: 项目文档✅</li>
+<li>🗓 2023年12月28日: 开放公共下载</li>
 </ul>
 <h3 id="_7">🏆 <strong>获得荣誉</strong></h3>
 <ul>
 <li>🥈 2023年8月: 获得国科大创新创业大赛二等奖</li>
 <li>🎖️ 2023年9月: 获得面壁智能hackthon挑战赛优胜奖</li>
+<li>🎖 2023年12月: 获得清华大模型应用创新挑战赛二等奖</li>
 </ul>
 <p>🔔 请持续关注我们的项目，以获取最新的进展和更新！</p></div>
             </div>
@@ -275,5 +307,5 @@
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2023-11-19 14:09:54.593247+00:00
+Build Date UTC : 2023-12-27 10:10:43.872753+00:00
 -->
